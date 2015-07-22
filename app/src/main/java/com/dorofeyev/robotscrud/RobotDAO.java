@@ -1,13 +1,11 @@
 package com.dorofeyev.robotscrud;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -19,12 +17,13 @@ import java.util.List;
  */
 public class RobotDAO implements IRobotDAO {
     @Override
-    public void create(Robot robot) throws Exception {
+    public void create(Robot robot)  {
 
     }
 
     @Override
-    public List<Robot> read() throws Exception {
+    public List<Robot> read(final Callback callback)  {
+
 
         RobotRestClient.get("", null, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -32,24 +31,16 @@ public class RobotDAO implements IRobotDAO {
             }
 
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                String str = "";
-                Robot robot = null;
                 ObjectMapper mapper = new ObjectMapper();
 
                 try {
-                    str = response.getString(0);
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-                try {
-                    robot = mapper.readValue(str, Robot.class);
-                    int y = 7+7;
+                    List<Robot> robots = null;
+                    robots = mapper.readValue(response.toString(), List.class);
+                    callback.execute(robots);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                int robotid = robot.getId();
             }
 
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
@@ -68,6 +59,7 @@ public class RobotDAO implements IRobotDAO {
 
             }
 
+            int x = 5+5;
 
         });
 
@@ -80,17 +72,17 @@ public class RobotDAO implements IRobotDAO {
     }
 
     @Override
-    public void update(Robot robot) throws Exception {
+    public void update(Robot robot) {
 
     }
 
     @Override
-    public void delete(Robot robot) throws Exception {
+    public void delete(Robot robot) {
 
     }
 
     @Override
-    public Robot fetchById(int id) throws Exception {
+    public Robot fetchById(int id) {
         return null;
     }
 }

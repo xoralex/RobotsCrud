@@ -7,14 +7,14 @@ import java.util.List;
  */
 public interface IRobotDAO {
 
-    public void create(Robot robot) throws Exception;
+    public void create(Robot robot);
 
-    public List<Robot> read() throws Exception;
+    public List<Robot> read(Callback command);
 
-    public void update(Robot robot) throws Exception;
+    public void update(Robot robot);
 
-    public void delete(Robot robot) throws Exception;
+    public void delete(Robot robot);
 
-    public Robot fetchById(int id) throws Exception;
+    public Robot fetchById(int id);
 
 }
