@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by xor on 7/20/15.
  */
-public class RobotDAO implements IRobotDAO {
+public class RestRobotDAO implements RobotDAO {
     @Override
     public void create(Robot robot)  {
 

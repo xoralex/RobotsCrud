@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by xor on 7/20/15.
  */
-public interface IRobotDAO {
+public interface RobotDAO {
 
     public void create(Robot robot);
 
