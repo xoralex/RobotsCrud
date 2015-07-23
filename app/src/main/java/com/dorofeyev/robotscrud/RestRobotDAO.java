@@ -24,11 +24,11 @@ public class RestRobotDAO implements RobotDAO {
     }
 
     @Override
-    public List<Robot> read(final Callback callback)  {
+    public void read(final Callback callback)  {
 
         RobotRestClient.get("", null, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                AsyncHttpClient.log.w("JsonHttpRH", "onSuccess(int, Header[], JSONObject) was not overriden, but callback was received");
+
             }
 
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -66,7 +66,6 @@ public class RestRobotDAO implements RobotDAO {
 
         });
 
-        return null;
     }
 
     @Override

@@ -9,7 +9,7 @@ public interface RobotDAO {
 
     public void create(Robot robot);
 
-    public List<Robot> read(Callback command);
+    public void read(Callback command);
 
     public void update(Robot robot);
 
