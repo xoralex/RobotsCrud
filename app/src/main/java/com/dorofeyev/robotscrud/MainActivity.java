@@ -1,17 +1,49 @@
 package com.dorofeyev.robotscrud;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    ListView robotsListView;
+    RobotsListViewAdapter robotsListViewAdapter;
+    Context context = MainActivity.this;
+    RobotDAO robotDAO = new RestRobotDAO();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        updateRobots();
+
+        robotsListView = (ListView)findViewById(R.id.listViewRobots);
+        robotsListViewAdapter = new RobotsListViewAdapter(context, new ArrayList<Robot>());
+        robotsListView.setAdapter(robotsListViewAdapter);
+    }
+
+    private void updateRobots() {
+        robotDAO.read(new Callback() {
+            @Override
+            public void execute(Object result) {
+                robotsListViewAdapter.robots = (List<Robot>)result;
+                robotsListViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -35,4 +67,15 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void buttonEditClicked(View view) {
+
+    }
+
+    public void buttonDeleteClicked(View view) {
+
+    }
+
+
+
 }

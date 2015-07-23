@@ -6,10 +6,12 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +26,6 @@ public class RestRobotDAO implements RobotDAO {
     @Override
     public List<Robot> read(final Callback callback)  {
 
-
         RobotRestClient.get("", null, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 AsyncHttpClient.log.w("JsonHttpRH", "onSuccess(int, Header[], JSONObject) was not overriden, but callback was received");
@@ -34,10 +35,14 @@ public class RestRobotDAO implements RobotDAO {
                 ObjectMapper mapper = new ObjectMapper();
 
                 try {
-                    List<Robot> robots = null;
-                    robots = mapper.readValue(response.toString(), List.class);
+                    List<Robot> robots = new ArrayList<Robot>();
+                    for (int i=0; i<response.length(); i++) {
+                        robots.add(mapper.readValue(response.get(i).toString(), Robot.class));
+                    }
                     callback.execute(robots);
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -59,14 +64,7 @@ public class RestRobotDAO implements RobotDAO {
 
             }
 
-            int x = 5+5;
-
         });
-
-
-
-
-
 
         return null;
     }
