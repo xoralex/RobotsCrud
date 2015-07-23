@@ -75,7 +75,33 @@ public class RestRobotDAO implements RobotDAO {
 
     @Override
     public void delete(Robot robot) {
+        String id = Integer.toString(robot.getId());
+        RobotRestClient.delete(id, null, new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+            }
+
+        });
     }
 
     @Override

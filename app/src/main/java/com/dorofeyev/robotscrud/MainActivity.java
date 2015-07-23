@@ -73,7 +73,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void buttonDeleteClicked(View view) {
+        int position = robotsListView.getPositionForView((View)view.getParent());
+        Robot robot = (Robot)robotsListView.getItemAtPosition(position);
 
+        robotsListViewAdapter.robots.remove(robot);
+        robotsListViewAdapter.notifyDataSetChanged();
+
+        robotDAO.delete(robot);
+        updateRobots();
     }
 
 
