@@ -18,7 +18,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"
+            android:text="@string/action_edit"
             android:id="@+id/buttonEdit"
             android:onClick="buttonEditClicked" />
 
@@ -26,7 +26,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
+            android:text="@string/action_delete"
             android:id="@+id/buttonDelete"
             android:onClick="buttonDeleteClicked" />
 
