@@ -11,4 +11,5 @@
     <string name="robot_field_type">Type</string>
     <string name="robot_field_year">Year</string>
     <string name="add_robot_dialog_header">Add a new robot</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

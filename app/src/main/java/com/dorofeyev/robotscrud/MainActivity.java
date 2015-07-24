@@ -66,6 +66,9 @@ public class MainActivity extends ActionBarActivity {
         else if (id == R.id.action_add) {
             menuAddClicked();
         }
+        else if (id == R.id.action_refresh) {
+            updateRobots();
+        }
 
         return super.onOptionsItemSelected(item);
     }
