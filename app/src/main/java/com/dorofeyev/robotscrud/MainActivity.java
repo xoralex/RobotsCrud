@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -87,7 +86,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void menuAddClicked() {
-        AddRobotDialogFragment addRobotDialogFragment = new AddRobotDialogFragment();
+        RobotDialogFragment addRobotDialogFragment = new RobotDialogFragment();
+        addRobotDialogFragment.setTitle((String) getText(R.string.add_robot_dialog_header));
         addRobotDialogFragment.show(getFragmentManager(), "");
     }
 
