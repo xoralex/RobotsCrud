@@ -82,7 +82,6 @@ public class MainActivity extends ActionBarActivity {
         robotsListViewAdapter.notifyDataSetChanged();
 
         robotDAO.delete(robot);
-        updateRobots();
     }
 
     public void menuAddClicked() {
@@ -98,9 +97,9 @@ public class MainActivity extends ActionBarActivity {
         Robot newRobot = new Robot(name, type, Integer.parseInt(year));
 
         robotsListViewAdapter.robots.add(newRobot);
+        robotsListViewAdapter.notifyDataSetChanged();
 
         robotDAO.create(newRobot);
-        updateRobots();
     }
 
 
