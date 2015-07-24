@@ -1,6 +1,13 @@
 package com.dorofeyev.robotscrud;
 
+import android.content.Context;
+
 import com.loopj.android.http.*;
+
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by xor on 7/20/15.
@@ -16,8 +23,16 @@ public class RobotRestClient {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
-    public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.post(getAbsoluteUrl(url), params, responseHandler);
+    public static void post(String url, JSONObject jsonParams, Context context, AsyncHttpResponseHandler responseHandler) {
+
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.post(context, getAbsoluteUrl(url), entity, "application/json", responseHandler);
     }
 
     public static void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

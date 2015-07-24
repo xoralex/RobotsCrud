@@ -1,16 +1,16 @@
 package com.dorofeyev.robotscrud;
 
 import android.content.Context;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
     ListView robotsListView;
     RobotsListViewAdapter robotsListViewAdapter;
     Context context = MainActivity.this;
-    RobotDAO robotDAO = new RestRobotDAO();
+    RobotDAO robotDAO = new RestRobotDAO(this);
 
 
     @Override
@@ -64,6 +64,9 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_add) {
+            menuAddClicked();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -82,6 +85,26 @@ public class MainActivity extends ActionBarActivity {
         robotDAO.delete(robot);
         updateRobots();
     }
+
+    public void menuAddClicked() {
+        AddRobotDialogFragment addRobotDialogFragment = new AddRobotDialogFragment();
+        addRobotDialogFragment.show(getFragmentManager(), "");
+    }
+
+    public void buttonAddClicked(View view) {
+        String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
+        String type = ((EditText)view.findViewById(R.id.editTextType)).getText().toString();
+        String year = ((EditText)view.findViewById(R.id.editTextYear)).getText().toString();
+        Robot newRobot = new Robot(name, type, Integer.parseInt(year));
+
+        robotsListViewAdapter.robots.add(newRobot);
+
+        robotDAO.create(newRobot);
+        updateRobots();
+    }
+
+
+
 
 
 

@@ -1,7 +1,8 @@
 package com.dorofeyev.robotscrud;
 
+import android.content.Context;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -18,9 +19,50 @@ import java.util.List;
  * Created by xor on 7/20/15.
  */
 public class RestRobotDAO implements RobotDAO {
+
+    private Context context;
+
+    public RestRobotDAO(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void create(Robot robot)  {
 
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("name", robot.getName());
+            jsonParams.put("type", robot.getType());
+            jsonParams.put("year", robot.getYear());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RobotRestClient.post("", jsonParams, context, new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+            }
+        });
     }
 
     @Override
