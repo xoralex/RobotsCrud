@@ -31,11 +31,15 @@ public class MainActivity extends ActionBarActivity {
 
         updateRobots();
 
+        // заполняем список данными
         robotsListView = (ListView)findViewById(R.id.listViewRobots);
         robotsListViewAdapter = new RobotsListViewAdapter(context, new ArrayList<Robot>());
         robotsListView.setAdapter(robotsListViewAdapter);
     }
 
+    /**
+     * Получаем список роботов с сервера и обновляем список на экране.
+     */
     private void updateRobots() {
         robotDAO.read(new Callback() {
             @Override
@@ -74,10 +78,63 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buttonEditClicked(View view) {
+    /**
+     * При нажатии на кнопку Delete удаляем выбранного робота.
+     * @param view
+     */
+    public void buttonDeleteClicked(View view) {
+        // берем выбранного робота
         int position = robotsListView.getPositionForView((View)view.getParent());
         Robot robot = (Robot)robotsListView.getItemAtPosition(position);
 
+        // обновляем список на экране
+        robotsListViewAdapter.robots.remove(robot);
+        robotsListViewAdapter.notifyDataSetChanged();
+
+        // посылаем запрос на сервер об удалении
+        robotDAO.delete(robot);
+    }
+
+    /**
+     * При выборе Add в меню добавляем нового робота
+     */
+    public void menuAddClicked() {
+        // вызываем диалоговое окно добавления робота
+        RobotDialogFragment addRobotDialogFragment = new RobotDialogFragment();
+        addRobotDialogFragment.setTitle((String) getText(R.string.add_robot_dialog_header));
+        addRobotDialogFragment.setDialogType(RobotDialogFragment.DialogType.ADD_ROBOT);
+        addRobotDialogFragment.show(getFragmentManager(), "");
+    }
+
+    /**
+     * При нажатии на кнопку Confirm диалогового окна добавления робота, добавляем робота.
+     * @param view
+     */
+    public void dialogAddRobotConfirmed(View view) {
+        // получаем данные из диалогового окна
+        String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
+        String type = ((Spinner)view.findViewById(R.id.spinnerType)).getSelectedItem().toString();
+        String year = ((EditText)view.findViewById(R.id.editTextYear)).getText().toString();
+        Robot newRobot = new Robot(name, type, Integer.parseInt(year));
+
+        // добавляем робота в список на экране
+        robotsListViewAdapter.robots.add(newRobot);
+        robotsListViewAdapter.notifyDataSetChanged();
+
+        // посылаем запрос на сервер о добавлении робота
+        robotDAO.create(newRobot);
+    }
+
+    /**
+     * При нажатии на кнопку Edit редактируем данные выбранного робота.
+     * @param view
+     */
+    public void buttonEditClicked(View view) {
+        // берем выбранного робота
+        int position = robotsListView.getPositionForView((View) view.getParent());
+        Robot robot = (Robot)robotsListView.getItemAtPosition(position);
+
+        // показываем диалог редактирования робота
         RobotDialogFragment editRobotDialogFragment = new RobotDialogFragment();
         editRobotDialogFragment.setTitle((String) getText(R.string.edit_robot_dialog_header));
         editRobotDialogFragment.setDialogType(RobotDialogFragment.DialogType.EDIT_ROBOT);
@@ -85,41 +142,18 @@ public class MainActivity extends ActionBarActivity {
         editRobotDialogFragment.show(getFragmentManager(), "");
     }
 
-    public void buttonDeleteClicked(View view) {
-        int position = robotsListView.getPositionForView((View)view.getParent());
-        Robot robot = (Robot)robotsListView.getItemAtPosition(position);
-
-        robotsListViewAdapter.robots.remove(robot);
-        robotsListViewAdapter.notifyDataSetChanged();
-
-        robotDAO.delete(robot);
-    }
-
-    public void menuAddClicked() {
-        RobotDialogFragment addRobotDialogFragment = new RobotDialogFragment();
-        addRobotDialogFragment.setTitle((String) getText(R.string.add_robot_dialog_header));
-        addRobotDialogFragment.setDialogType(RobotDialogFragment.DialogType.ADD_ROBOT);
-        addRobotDialogFragment.show(getFragmentManager(), "");
-    }
-
-    public void dialogAddRobotConfirmed(View view) {
-        String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
-        String type = ((Spinner)view.findViewById(R.id.spinnerType)).getSelectedItem().toString();
-        String year = ((EditText)view.findViewById(R.id.editTextYear)).getText().toString();
-        Robot newRobot = new Robot(name, type, Integer.parseInt(year));
-
-        robotsListViewAdapter.robots.add(newRobot);
-        robotsListViewAdapter.notifyDataSetChanged();
-
-        robotDAO.create(newRobot);
-    }
-
+    /**
+     * При нажатии на кнопку Confirm диалогового окна редактирования робота, редактируем робота.
+     * @param view
+     */
     public void dialogEditRobotConfirmed(View view) {
+        // получаем данные из диалогового окна
         int id = Integer.parseInt(((EditText) view.findViewById(R.id.editTextId)).getText().toString());
         String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
         String type = ((Spinner)view.findViewById(R.id.spinnerType)).getSelectedItem().toString();
         int year = Integer.parseInt(((EditText) view.findViewById(R.id.editTextYear)).getText().toString());
 
+        // изменяем робота на экране
         for (Robot robot : robotsListViewAdapter.robots) {
             if (robot.getId() == id) {
                 robot.setName(name);
@@ -130,6 +164,7 @@ public class MainActivity extends ActionBarActivity {
         }
         robotsListViewAdapter.notifyDataSetChanged();
 
+        // посылаем запрос на сервер об изменении робота
         robotDAO.update(new Robot(id, name, type, year));
     }
 }

@@ -17,6 +17,8 @@ import java.util.List;
 
 /**
  * Created by xor on 7/20/15.
+ * Класс Data Access Object для взаимодействия с данными.
+ * Данные хранятся на сервере. Взаимодействие осуществляется через REST API.
  */
 public class RestRobotDAO implements RobotDAO {
 
@@ -26,9 +28,13 @@ public class RestRobotDAO implements RobotDAO {
         this.context = context;
     }
 
+    /**
+     * Создаем нового робота
+     * @param robot робот которого нужно создать
+     */
     @Override
     public void create(Robot robot)  {
-
+        
         JSONObject jsonParams = new JSONObject();
         try {
             jsonParams.put("name", robot.getName());
@@ -39,29 +45,12 @@ public class RestRobotDAO implements RobotDAO {
         }
 
         RobotRestClient.post("", jsonParams, context, new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-            }
-
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-            }
-
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-            }
-
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-
-            }
-
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
-            }
-
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
-            }
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {}
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {}
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {}
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {}
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {}
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {}
         });
     }
 
