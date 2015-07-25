@@ -2,6 +2,7 @@ package com.dorofeyev.robotscrud;
 
 /**
  * Created by xor on 7/21/15.
+ * Класс описывающий робота
  */
 public class Robot {
 

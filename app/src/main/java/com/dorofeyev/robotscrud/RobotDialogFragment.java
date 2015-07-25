@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Диалоговое окно для добавления/редактирования робота
+ */
 public class RobotDialogFragment extends DialogFragment {
 
     public enum DialogType {
@@ -31,6 +34,7 @@ public class RobotDialogFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.fragment_dialog_robot, container,
                 false);
 
+        // вешаем эвент на нажатие кнопки Confrim
         Button addRobotButton = (Button) rootView.findViewById(R.id.buttonConfirm);
         addRobotButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +43,7 @@ public class RobotDialogFragment extends DialogFragment {
             }
         });
 
+        // заполняем выпадающий список значениями
         Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerType);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(rootView.getContext(),
                 R.array.robot_types_array, android.R.layout.simple_spinner_item);
@@ -59,6 +64,10 @@ public class RobotDialogFragment extends DialogFragment {
         return rootView;
     }
 
+    /**
+     * При нажатии кнопки Confirm передаем управление соответствующему методу в MainActivity
+     * @param view
+     */
     public void confirmButtonClicked(View view) {
         switch (dialogType) {
             case ADD_ROBOT:

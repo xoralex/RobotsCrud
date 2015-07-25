@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by xor on 7/23/15.
+ * Класс, отвечающий за отображение данных в ListView списке роботов
  */
 public class RobotsListViewAdapter extends BaseAdapter {
 

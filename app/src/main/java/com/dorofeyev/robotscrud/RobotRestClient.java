@@ -11,10 +11,15 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Created by xor on 7/20/15.
+ * Класс облегчающий взаимодействие с android-async-http.
+ * Позволяет отправлять разные виды http запросов.
  */
 public class RobotRestClient {
 
     private static final String BASE_URL = "http://frontend.test.pleaple.com/api/robots/";
+    private static String getAbsoluteUrl(String relativeUrl) {
+        return BASE_URL + relativeUrl;
+    }
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -48,11 +53,6 @@ public class RobotRestClient {
 
     public static void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.delete(getAbsoluteUrl(url), params, responseHandler);
-    }
-
-
-    private static String getAbsoluteUrl(String relativeUrl) {
-        return BASE_URL + relativeUrl;
     }
 
 }

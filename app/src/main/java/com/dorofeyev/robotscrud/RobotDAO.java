@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by xor on 7/20/15.
+ * Интерфейс Data Access Object для взаимодействия с данными.
  */
 public interface RobotDAO {
 
