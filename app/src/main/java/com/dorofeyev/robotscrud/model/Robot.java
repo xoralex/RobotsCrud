@@ -1,4 +1,4 @@
-package com.dorofeyev.robotscrud;
+package com.dorofeyev.robotscrud.model;
 
 /**
  * Created by xor on 7/21/15.
@@ -13,20 +13,20 @@ public class Robot {
 
     private static final int VALUE_NOT_SET = -1;
 
-    Robot(){}
+    public Robot(){}
 
-    Robot(int id, String name, String type, int year) {
+    public Robot(int id, String name, String type, int year) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.year = year;
     }
 
-    Robot (int id, String name) {
+    public Robot (int id, String name) {
         this(id, name, "", VALUE_NOT_SET);
     }
 
-    Robot (String name, String type, int year) {
+    public Robot (String name, String type, int year) {
         this(VALUE_NOT_SET, name, type, year);
     }
 

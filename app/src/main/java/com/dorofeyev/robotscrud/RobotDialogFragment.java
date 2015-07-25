@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.dorofeyev.robotscrud.model.Robot;
+
 /**
  * Диалоговое окно для добавления/редактирования робота
  */

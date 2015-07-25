@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 
+import com.dorofeyev.robotscrud.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

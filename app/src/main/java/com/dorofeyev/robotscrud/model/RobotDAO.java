@@ -1,4 +1,4 @@
-package com.dorofeyev.robotscrud;
+package com.dorofeyev.robotscrud.model;
 
 import java.util.List;
 
