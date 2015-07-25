@@ -15,4 +15,9 @@
     <string name="add_robot_dialog_header">Add a new robot</string>
     <string name="edit_robot_dialog_header">Edit a robot</string>
     <string name="robot_field_id">Id</string>
+    <string-array name="robot_types_array">
+        <item>droid</item>
+        <item>mechanical</item>
+        <item>virtual</item>
+    </string-array>
 </resources>

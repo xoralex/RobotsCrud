@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class RobotDialogFragment extends DialogFragment {
 
@@ -42,6 +44,12 @@ public class RobotDialogFragment extends DialogFragment {
                 confirmButtonClicked(view);
             }
         });
+
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.robot_types_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         switch (dialogType) {
             case ADD_ROBOT:

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void dialogAddRobotConfirmed(View view) {
         String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
-        String type = ((EditText)view.findViewById(R.id.editTextType)).getText().toString();
+        String type = ((Spinner)view.findViewById(R.id.spinnerType)).getSelectedItem().toString();
         String year = ((EditText)view.findViewById(R.id.editTextYear)).getText().toString();
         Robot newRobot = new Robot(name, type, Integer.parseInt(year));
 
@@ -116,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
     public void dialogEditRobotConfirmed(View view) {
         int id = Integer.parseInt(((EditText) view.findViewById(R.id.editTextId)).getText().toString());
         String name = ((EditText)view.findViewById(R.id.editTextName)).getText().toString();
-        String type = ((EditText)view.findViewById(R.id.editTextType)).getText().toString();
+        String type = ((Spinner)view.findViewById(R.id.spinnerType)).getSelectedItem().toString();
         int year = Integer.parseInt(((EditText) view.findViewById(R.id.editTextYear)).getText().toString());
 
         for (Robot robot : robotsListViewAdapter.robots) {

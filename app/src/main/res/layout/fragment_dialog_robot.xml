@@ -40,10 +40,10 @@
             android:layout_height="wrap_content"
             android:text="@string/robot_field_type" />
 
-        <EditText
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextType"
+            android:id="@+id/spinnerType"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
@@ -63,7 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editTextYear"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:inputType="date"
+            android:text="0" />
 
     </LinearLayout>
 
