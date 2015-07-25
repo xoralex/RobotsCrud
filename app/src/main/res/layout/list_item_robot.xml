@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Name of a robot"
-            android:id="@+id/textViewName" />
+            android:id="@+id/textViewName"
+            android:layout_centerVertical="true" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -21,7 +22,8 @@
             android:layout_height="wrap_content"
             android:text="@string/action_edit"
             android:id="@+id/buttonEdit"
-            android:onClick="buttonEditClicked" />
+            android:onClick="buttonEditClicked"
+            android:layout_toLeftOf="@+id/buttonDelete"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -29,9 +31,10 @@
             android:layout_height="wrap_content"
             android:text="@string/action_delete"
             android:id="@+id/buttonDelete"
-            android:onClick="buttonDeleteClicked" />
+            android:onClick="buttonDeleteClicked"
+            android:layout_alignParentRight="true"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
