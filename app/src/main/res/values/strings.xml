@@ -9,9 +9,9 @@
     <string name="action_edit">Edit</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_confirm">Confirm</string>
-    <string name="robot_field_name">Name</string>
-    <string name="robot_field_type">Type</string>
-    <string name="robot_field_year">Year</string>
+    <string name="robot_field_name">Name: </string>
+    <string name="robot_field_type">Type: </string>
+    <string name="robot_field_year">Year: </string>
     <string name="add_robot_dialog_header">Add a new robot</string>
     <string name="edit_robot_dialog_header">Edit a robot</string>
     <string name="robot_field_id">Id</string>

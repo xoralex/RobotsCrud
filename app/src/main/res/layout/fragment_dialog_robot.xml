@@ -7,8 +7,7 @@
     <EditText
         android:layout_width="0px"
         android:layout_height="0px"
-        android:id="@+id/editTextId"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/editTextId" />
 
 
     <LinearLayout
@@ -19,13 +18,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/robot_field_name" />
+            android:text="@string/robot_field_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerVertical="true" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextName"
-            android:layout_gravity="center_horizontal" />
+            android:layout_centerVertical="true"/>
 
     </LinearLayout>
 
@@ -38,13 +39,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/robot_field_type" />
+            android:text="@string/robot_field_type"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerVertical="true" />
 
         <Spinner
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerType"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/spinnerType" />
 
     </LinearLayout>
 
@@ -57,13 +59,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/robot_field_year"/>
+            android:text="@string/robot_field_year"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerVertical="true" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextYear"
-            android:layout_gravity="center_horizontal"
             android:inputType="date"
             android:text="0" />
 
