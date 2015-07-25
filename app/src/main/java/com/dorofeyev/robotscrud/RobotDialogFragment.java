@@ -20,11 +20,6 @@ public class RobotDialogFragment extends DialogFragment {
         this.dialogType = dialogType;
     }
 
-    private String title;
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     private Robot robot;
     public void setRobot(Robot robot) {
         this.robot = robot;
@@ -35,7 +30,6 @@ public class RobotDialogFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dialog_robot, container,
                 false);
-        getDialog().setTitle(title);
 
         Button addRobotButton = (Button) rootView.findViewById(R.id.buttonConfirm);
         addRobotButton.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +47,10 @@ public class RobotDialogFragment extends DialogFragment {
 
         switch (dialogType) {
             case ADD_ROBOT:
+                getDialog().setTitle(getText(R.string.add_robot_dialog_header));
                 break;
             case EDIT_ROBOT:
+                getDialog().setTitle(getText(R.string.edit_robot_dialog_header));
                 ((EditText)rootView.findViewById(R.id.editTextId)).setText(Integer.toString(robot.getId()));
                 ((EditText)rootView.findViewById(R.id.editTextName)).setText(robot.getName());
                 break;

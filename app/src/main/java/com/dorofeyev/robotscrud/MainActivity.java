@@ -101,7 +101,6 @@ public class MainActivity extends ActionBarActivity {
     public void menuAddClicked() {
         // вызываем диалоговое окно добавления робота
         RobotDialogFragment addRobotDialogFragment = new RobotDialogFragment();
-        addRobotDialogFragment.setTitle((String) getText(R.string.add_robot_dialog_header));
         addRobotDialogFragment.setDialogType(RobotDialogFragment.DialogType.ADD_ROBOT);
         addRobotDialogFragment.show(getFragmentManager(), "");
     }
@@ -136,7 +135,6 @@ public class MainActivity extends ActionBarActivity {
 
         // показываем диалог редактирования робота
         RobotDialogFragment editRobotDialogFragment = new RobotDialogFragment();
-        editRobotDialogFragment.setTitle((String) getText(R.string.edit_robot_dialog_header));
         editRobotDialogFragment.setDialogType(RobotDialogFragment.DialogType.EDIT_ROBOT);
         editRobotDialogFragment.setRobot(robot);
         editRobotDialogFragment.show(getFragmentManager(), "");
