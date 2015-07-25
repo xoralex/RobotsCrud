@@ -23,11 +23,11 @@ public class RobotRestClient {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
-    public static void post(String url, JSONObject jsonParams, Context context, AsyncHttpResponseHandler responseHandler) {
+    public static void post(String url, String robotJson, Context context, AsyncHttpResponseHandler responseHandler) {
 
         StringEntity entity = null;
         try {
-            entity = new StringEntity(jsonParams.toString());
+            entity = new StringEntity(robotJson);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -35,10 +35,10 @@ public class RobotRestClient {
         client.post(context, getAbsoluteUrl(url), entity, "application/json", responseHandler);
     }
 
-    public static void put(String url, JSONObject jsonParams, Context context, AsyncHttpResponseHandler responseHandler) {
+    public static void put(String url, String robotJson, Context context, AsyncHttpResponseHandler responseHandler) {
         StringEntity entity = null;
         try {
-            entity = new StringEntity(jsonParams.toString());
+            entity = new StringEntity(robotJson);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

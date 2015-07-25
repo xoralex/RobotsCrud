@@ -2,6 +2,7 @@ package com.dorofeyev.robotscrud;
 
 import android.content.Context;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,6 +23,8 @@ import java.util.List;
  */
 public class RestRobotDAO implements RobotDAO {
 
+    private ObjectMapper mapper = new ObjectMapper();
+
     private Context context;
 
     public RestRobotDAO(Context context) {
@@ -34,17 +37,16 @@ public class RestRobotDAO implements RobotDAO {
      */
     @Override
     public void create(Robot robot)  {
-        
-        JSONObject jsonParams = new JSONObject();
+
+        // Переводим робота в формат JSON
+        String robotJson = null;
         try {
-            jsonParams.put("name", robot.getName());
-            jsonParams.put("type", robot.getType());
-            jsonParams.put("year", robot.getYear());
-        } catch (JSONException e) {
+            robotJson = mapper.writeValueAsString(robot);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        RobotRestClient.post("", jsonParams, context, new JsonHttpResponseHandler() {
+        RobotRestClient.post("", robotJson, context, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {}
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {}
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {}
@@ -63,8 +65,6 @@ public class RestRobotDAO implements RobotDAO {
             }
 
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                ObjectMapper mapper = new ObjectMapper();
-
                 try {
                     List<Robot> robots = new ArrayList<Robot>();
                     for (int i=0; i<response.length(); i++) {
@@ -101,18 +101,17 @@ public class RestRobotDAO implements RobotDAO {
 
     @Override
     public void update(Robot robot) {
-        JSONObject jsonParams = new JSONObject();
+        // Переводим робота в формат JSON
+        String robotJson = null;
         try {
-            jsonParams.put("name", robot.getName());
-            jsonParams.put("type", robot.getType());
-            jsonParams.put("year", robot.getYear());
-        } catch (JSONException e) {
+            robotJson = mapper.writeValueAsString(robot);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
         String id = Integer.toString(robot.getId());
 
-        RobotRestClient.put(id, jsonParams, context, new JsonHttpResponseHandler() {
+        RobotRestClient.put(id, robotJson, context, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
             }
