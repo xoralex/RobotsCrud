@@ -64,7 +64,7 @@ public class RobotsListViewAdapter extends BaseAdapter {
         TextView textViewName;
 
         public MyViewHolder(View item) {
-            textViewName = (TextView) item.findViewById(R.id.name);
+            textViewName = (TextView) item.findViewById(R.id.textViewName);
         }
     }
 }
