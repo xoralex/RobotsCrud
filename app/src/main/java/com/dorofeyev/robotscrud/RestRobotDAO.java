@@ -112,7 +112,42 @@ public class RestRobotDAO implements RobotDAO {
 
     @Override
     public void update(Robot robot) {
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("name", robot.getName());
+            jsonParams.put("type", robot.getType());
+            jsonParams.put("year", robot.getYear());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        String id = Integer.toString(robot.getId());
+
+        RobotRestClient.put(id, jsonParams, context, new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+
+            }
+
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+            }
+        });
     }
 
     @Override

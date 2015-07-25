@@ -35,8 +35,15 @@ public class RobotRestClient {
         client.post(context, getAbsoluteUrl(url), entity, "application/json", responseHandler);
     }
 
-    public static void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.put(getAbsoluteUrl(url), params, responseHandler);
+    public static void put(String url, JSONObject jsonParams, Context context, AsyncHttpResponseHandler responseHandler) {
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.put(context, getAbsoluteUrl(url), entity, "application/json", responseHandler);
     }
 
     public static void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
