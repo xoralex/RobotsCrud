@@ -31,12 +31,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        updateRobots();
-
         // заполняем список данными
         robotsListView = (ListView)findViewById(R.id.listViewRobots);
         robotsListViewAdapter = new RobotsListViewAdapter(context, new ArrayList<Robot>());
         robotsListView.setAdapter(robotsListViewAdapter);
+
+        updateRobots();
     }
 
     /**
